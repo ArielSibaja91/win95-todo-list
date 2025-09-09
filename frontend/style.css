@@ -1,20 +1,133 @@
-.add-btn {
-    background-color: green;
+@font-face {
+    font-family: 'win95';
+    src: url('./assets/fonts/w95fa.woff2') format('woff2'),
+        url('./assets/fonts/w95fa.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --desktop: #008080;
+    --active: #000080;
+    --base-gray: #C0C0C0;
+    --shadow: #808080;
+    --light-shadow: #dfdfdf;
+    --dark-shadow: #393939;
+    --text: #000000;
+    --highlight: #FFFFFF;
+    --danger: #fa5252;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'win95', sans-serif;
+    background-color: var(--desktop);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.window-title-bar {
+    background-color: var(--base-gray);
     color: white;
-    padding: 4px 8px;
+}
+
+.main-container {
+    width: 500px;
+    background-color: var(--base-gray);
+    padding: 6px;
+    border-top: 2px solid var(--highlight);
+    border-left: 2px solid var(--highlight);
+    border-bottom: 3px solid var(--dark-shadow);
+    border-right: 3px solid var(--dark-shadow);
+}
+
+.main-title {
+    width: 100%;
+    background-color: var(--active);
+    color: white;
+    padding: 2px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#task-form {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 10px;
+}
+
+#task-input,
+#task-input:focus {
+    width: 100%;
+    color: black;
+    padding: .3rem;
+    border: 1px solid #4A4A4A;
+    box-shadow: none;
+    border-radius: 0;
+    outline: none;
+}
+
+.hidden-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
     border: 0;
-    border-radius: 5px;
+}
+
+#task-list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    gap: 10px;
+}
+
+.add-btn {
+    background-color: var(--base-gray);
+    border-top: 2px solid var(--highlight);
+    border-left: 2px solid var(--highlight);
+    border-bottom: 2px solid var(--shadow);
+    border-right: 2px solid var(--shadow);
+    outline: 1px solid black;
+    color: black;
+    padding: 4px 8px;
+    border-radius: 1px;
     cursor: pointer;
+}
+
+.add-btn:focus {
+    border: 2px solid var(--base-gray);
+    outline: 1px solid var(--base-gray);
 }
 
 .delete-btn {
     margin-left: 10px;
-    background-color: red;
+    background-color: var(--danger);
     color: white;
+    outline: 1px solid var(--danger);
+    border-top: 2px solid white;
+    border-left: 2px solid white;
+    border-bottom: 2px solid var(--shadow);
+    border-right: 2px solid var(--shadow);
     padding: 4px 8px;
-    border: 0;
-    border-radius: 5px;
+    border-radius: 1px;
     cursor: pointer;
+}
+
+.delete-btn:focus {
+    border: 2px solid var(--danger);
+    outline: 1px solid var(--danger);
 }
 
 .completed-btn {
@@ -23,6 +136,50 @@
     color: white;
     padding: 4px 8px;
     border: 0;
-    border-radius: 5px;
+    border-radius: 1px;
     cursor: pointer;
+}
+
+#task-list li {
+    display: flex;
+    align-items: center;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 13px;
+    height: 13px;
+    border-top: 2px solid var(--shadow);
+    border-left: 2px solid var(--shadow);
+    border-bottom: 2px solid var(--highlight);
+    border-right: 2px solid var(--highlight);
+    background-color: var(--highlight);
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+    border-top: 2px solid var(--highlight);
+    border-left: 2px solid var(--highlight);
+    border-bottom: 2px solid var(--shadow);
+    border-right: 2px solid var(--shadow);
+}
+
+input[type="checkbox"]:checked::before {
+    content: 'X';
+    color: var(--text);
+    background-color: var(--highlight);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 12px;
+    line-height: 1;
+}
+
+input[type="checkbox"]:checked+.task-text {
+    text-decoration: line-through;
 }

@@ -12,27 +12,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
             tasks.forEach(task => {
                 const li = document.createElement('li');
-                li.textContent = task.description;
-                li.style.textDecoration = task.completed ? 'line-through' : 'none';
-                taskList.appendChild(li);
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.checked = task.completed;
+                checkbox.style.marginRight = '10px';
+                checkbox.addEventListener('change', () => {
+                    updateTask(task.id, checkbox.checked);
+                });
+
+                const taskText = document.createElement('span');
+                taskText.classList.add('task-text');
+                taskText.textContent = task.description;
+
                 const deleteBtn = document.createElement('button');
-                deleteBtn.textContent = 'Eliminar';
-                deleteBtn.classList.add('delete-btn')
+                deleteBtn.textContent = 'Delete';
+                deleteBtn.classList.add('delete-btn');
                 deleteBtn.addEventListener('click', () => {
                     deleteTask(task.id);
                 });
-                const completedBtn = document.createElement('button');
-                completedBtn.textContent = 'Done';
-                completedBtn.classList.add('completed-btn');
-                completedBtn.addEventListener('click', () => {
-                    updateTask(task.id, task.completed);
-                });
 
+                li.appendChild(checkbox);
+                li.appendChild(taskText);
                 li.appendChild(deleteBtn);
-                li.appendChild(completedBtn);
+
+                taskList.appendChild(li);
             });
         } catch (error) {
-            console.error('Error al obtener las tareas:', error);
+            console.error('Error while fetching tasks:', error);
         }
     };
 
@@ -52,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 getAllTasks();
                 taskInput.value = '';
             } catch (error) {
-                console.error('Error al añadir la tarea:', error);
+                console.error('Error while adding a task:', error);
             }
         }
     };
@@ -65,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (response.ok) {
                 getAllTasks();
             } else {
-                console.error('Error al eliminar la tarea.');
+                console.error('Error while deleting a task.', error);
             }
         } catch (error) {
             console.error('Error:', error);
@@ -80,13 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    completed: !status
+                    completed: status
                 })
             });
             if (response.ok) {
                 getAllTasks();
             } else {
-                console.error('Error al actualizar la tarea.');
+                console.error('Error updating the task completed status.');
             }
         } catch (error) {
             console.error('Error:', error);

@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo-list</title>
+    <title>Win95 Todo-list</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <h1>My Todo-list</h1>
-    <form id="task-form">
-        <input type="text" placeholder="Add a new task" id="task-input" required>
-        <button type="submit" class="add-btn">Add</button>
-    </form>
-    <ul id="task-list"></ul>
+    <main class="main-container">
+        <h1 class="main-title">Win 95 Todo-list</h1>
+        <form id="task-form">
+            <label for="task-input" class="hidden-label">Add a new task</label>
+            <input type="text" placeholder="Add a new task" id="task-input" required>
+            <button type="submit" class="add-btn">Add</button>
+        </form>
+        <ul id="task-list"></ul>
+    </main>
 
     <script src="index.js"></script>
 </body>

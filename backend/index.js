@@ -33,7 +33,7 @@ const server = http.createServer(async (req, res) => {
         }
     } else if (req.url === '/tasks' && req.method === 'GET') {
         try {
-            const result = await pool.query('SELECT * FROM tasks');
+            const result = await pool.query('SELECT * FROM tasks ORDER BY id ASC');
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify(result.rows));
         } catch (error) {

@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const getAllTasks = async () => {
         try {
-            const response = await fetch('http://localhost:3000/tasks');
+            const response = await fetch('https://win95-to-do-list.onrender.com/tasks');
             const tasks = await response.json();
 
             taskList.innerHTML = '';
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const description = taskInput.value.trim();
         if (description) {
             try {
-                const response = await fetch('http://localhost:3000/tasks', {
+                const response = await fetch('https://win95-to-do-list.onrender.com/tasks', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const deleteTask = async (id) => {
         try {
-            const response = await fetch(`http://localhost:3000/tasks/${id}`, {
+            const response = await fetch(`https://win95-to-do-list.onrender.com/tasks/${id}`, {
                 method: 'DELETE'
             });
             if (response.ok) {
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const updateTask = async (id, status) => {
         try {
-            const response = await fetch(`http://localhost:3000/tasks/${id}`, {
+            const response = await fetch(`https://win95-to-do-list.onrender.com/tasks/${id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
